@@ -1,8 +1,6 @@
 package com.jincou.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,8 +11,6 @@ import java.util.List;
 /**
  * user
  */
-@AllArgsConstructor
-@NoArgsConstructor
 public class User implements UserDetails {
     /**
      *
@@ -42,13 +38,6 @@ public class User implements UserDetails {
     private Boolean enabled;
 
     private List<Roles> roles;
-
-
-    public User(String username, String password, List<Roles> roles) {
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
-    }
 
     /**
      * 获取用户名
@@ -101,7 +90,7 @@ public class User implements UserDetails {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 
@@ -145,14 +134,6 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public List<Roles> getRoles() {
         return roles;
     }
@@ -160,4 +141,6 @@ public class User implements UserDetails {
     public void setRoles(List<Roles> roles) {
         this.roles = roles;
     }
+
+
 }

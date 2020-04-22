@@ -9,12 +9,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 
 /**
- * @Description: Spring Security的Java 配置类。
- *
  * @author xub
+ * @Description: Spring Security的Java 配置类。
  * @date 2020/4/17 下午5:25
  */
 @Configuration
@@ -38,13 +41,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 失败处理器
      */
-   @Autowired
-   private AuthenctiationFailHandler authenctiationFailHandler;
+    @Autowired
+    private AuthenctiationFailHandler authenctiationFailHandler;
+
+    @Autowired
+    private DataSource dataSource;
 
 
-   /**
-    * 向Security注入用户信息
-    */
+    /**
+     * 向Security注入用户信息
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passWordEncorder);
@@ -76,10 +82,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 //定义登录时，用户密码的 key，默认为 password
                 .passwordParameter("password").permitAll()
-                .and().logout()
+                .and()
+                .rememberMe()
+                .tokenRepository(tokenRepository())
+                //过期时间为1小时
+                .tokenValiditySeconds(3600)
+                .and()
+                .logout()
                 ////和表单登录相关的接口统统都直接通过
                 .permitAll()
                 .and().csrf().disable().exceptionHandling().accessDeniedHandler(getAccessDeniedHandler());
+    }
+
+
+    @Bean
+    public PersistentTokenRepository tokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+        //tokenRepository.setCreateTableOnStartup(true);
+        return tokenRepository;
     }
 
     /**
@@ -87,7 +108,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers( "/no-login");
+        web.ignoring().antMatchers("/no-login");
     }
 
     /**

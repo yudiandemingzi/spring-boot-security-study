@@ -5,7 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring-boot-security-study-01</module>
-        <module>spring-boot-security-02</module>
+        <module>spring-boot-security-study-02</module>
     </modules>
     <parent>
     <groupId>org.springframework.boot</groupId>

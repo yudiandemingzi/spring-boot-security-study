@@ -43,7 +43,7 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         //获取用户信息
         User user = userMapper.findOneByUsername(userName);
-        if (user != null) {
+        if (user == null) {
             throw new UsernameNotFoundException("未查询到用户信息");
         }
         //获取用户关联角色信息 如果为空说明用户并未关联角色
