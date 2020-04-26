@@ -1,6 +1,8 @@
-package com.jincou.imgcheck.validate.code;
+package com.jincou.imgcheck.config;
 
 import com.jincou.imgcheck.properties.ImageCodeProperties;
+import com.jincou.imgcheck.service.ValidateCodeGeneratorService;
+import com.jincou.imgcheck.service.impl.ImageCodeGeneratorServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,8 +17,8 @@ public class ValidateCodeBeanConfig {
 
 
     @Bean
-    public ValidateCodeGenerator imageCodeGenerator() {
-        ImageCodeGenerator imageCodeGenerator = new ImageCodeGenerator();
+    public ValidateCodeGeneratorService imageCodeGenerator() {
+        ImageCodeGeneratorServiceImpl imageCodeGenerator = new ImageCodeGeneratorServiceImpl();
         imageCodeGenerator.setImageCodeProperties(imageCodeProperties());
         return imageCodeGenerator;
     }

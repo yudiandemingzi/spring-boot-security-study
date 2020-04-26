@@ -1,12 +1,11 @@
-package jincou.imgcheck.service;
+package com.jincou.imgcheck.service;
 
-
-import com.jincou.entity.Roles;
-import com.jincou.entity.RolesUser;
-import com.jincou.entity.User;
-import com.jincou.mapper.RolesMapper;
-import com.jincou.mapper.RolesUserMapper;
-import com.jincou.mapper.UserMapper;
+import com.jincou.imgcheck.entity.Roles;
+import com.jincou.imgcheck.entity.RolesUser;
+import com.jincou.imgcheck.entity.User;
+import com.jincou.imgcheck.mapper.RolesUserMapper;
+import com.jincou.imgcheck.mapper.UserMapper;
+import com.jincou.imgcheck.mapper.RolesMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

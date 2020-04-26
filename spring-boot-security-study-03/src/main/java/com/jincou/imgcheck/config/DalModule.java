@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018 Wantu, All rights reserved.
  */
-package jincou.imgcheck.config;
+package com.jincou.imgcheck.config;
 
 
 import com.alibaba.druid.pool.DruidDataSource;
@@ -26,7 +26,7 @@ import java.util.Collections;
  */
 @Configuration
 @ComponentScan(basePackageClasses = DalModule.class)
-@MapperScan(basePackages = "com.jincou.mapper")
+@MapperScan(basePackages = "com.jincou.imgcheck.mapper")
 public class DalModule {
 
     /**
@@ -35,7 +35,7 @@ public class DalModule {
     @Bean
     public DataSource dataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
-        druidDataSource.setUrl("jdbc:mysql://127.0.0.1:3306/security1.0?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Hongkong");
+        druidDataSource.setUrl("jdbc:mysql://47.99.203.55:3306/security1.0?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Hongkong");
         druidDataSource.setDriverClassName("com.mysql.jdbc.Driver");
         druidDataSource.setUsername("root");
         druidDataSource.setPassword("123456");

@@ -1,8 +1,8 @@
-package jincou.imgcheck.mapper;
+package com.jincou.imgcheck.mapper;
 
 
-import jincou.imgcheck.entity.User;
-import org.jboss.logging.Param;
+import com.jincou.imgcheck.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     /**

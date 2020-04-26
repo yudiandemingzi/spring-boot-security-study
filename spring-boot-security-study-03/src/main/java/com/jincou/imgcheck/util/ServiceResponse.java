@@ -1,4 +1,4 @@
-package jincou.imgcheck.util;
+package com.jincou.imgcheck.util;
 
 import java.io.Serializable;
 

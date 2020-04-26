@@ -1,5 +1,7 @@
-package com.jincou.imgcheck.validate.code;
+package com.jincou.imgcheck.controller;
 
+import com.jincou.imgcheck.properties.ImageCode;
+import com.jincou.imgcheck.service.ValidateCodeGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
@@ -22,15 +24,19 @@ import java.io.IOException;
 @RestController
 public class ValidateCodeController {
 
-    static final String SESSION_KEY = "SESSION_KEY_IMAGE_CODE";
+    /**
+     * 价格前缀
+     */
+   public static final String SESSION_KEY = "SESSION_KEY_IMAGE_CODE";
+
     private static final String FORMAT_NAME = "JPEG";
 
-    private final ValidateCodeGenerator imageCodeGenerator;
+    private final ValidateCodeGeneratorService imageCodeGenerator;
 
     private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
 
     @Autowired
-    public ValidateCodeController(ValidateCodeGenerator imageCodeGenerator) {
+    public ValidateCodeController(ValidateCodeGeneratorService imageCodeGenerator) {
         this.imageCodeGenerator = imageCodeGenerator;
     }
 

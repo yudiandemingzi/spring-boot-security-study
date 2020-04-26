@@ -1,4 +1,4 @@
-package jincou.imgcheck.config;
+package com.jincou.imgcheck.config;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;

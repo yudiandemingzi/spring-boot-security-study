@@ -1,8 +1,8 @@
-package jincou.imgcheck.mapper;
+package com.jincou.imgcheck.mapper;
 
 
-import jincou.imgcheck.entity.RolesUser;
-import org.jboss.logging.Param;
+import com.jincou.imgcheck.entity.RolesUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.jincou.imgcheck.validate.code;
+package com.jincou.imgcheck.service;
 
 import com.jincou.imgcheck.properties.ImageCode;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -10,7 +10,7 @@ import org.springframework.web.context.request.ServletWebRequest;
   * @author xub
   * @date 2020/4/24 下午11:58
   */
-public interface ValidateCodeGenerator {
+public interface ValidateCodeGeneratorService {
 
     /**
      * 生成图片验证码

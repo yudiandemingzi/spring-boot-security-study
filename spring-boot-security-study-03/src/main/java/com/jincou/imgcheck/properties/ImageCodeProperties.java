@@ -1,13 +1,13 @@
-package com.lemon.security.core.properties;
+package com.jincou.imgcheck.properties;
 
 import lombok.Data;
 
 /**
- * 图形验证码的默认配置
- *
- * @author lemon
- * @date 2018/4/6 下午9:42
- */
+  * @Description: 图形验证码的默认配置
+  *
+  * @author xub
+  * @date 2020/4/24 下午11:50
+  */
 @Data
 public class ImageCodeProperties {
 
@@ -29,8 +29,8 @@ public class ImageCodeProperties {
     private int expireIn = 60;
 
     /**
-     * 需要验证码的url字符串，用英文逗号隔开
+     * 需要验证码的请求url字符串，用英文逗号隔开
      */
-    private String url;
+    private String url = "/login";
 
 }

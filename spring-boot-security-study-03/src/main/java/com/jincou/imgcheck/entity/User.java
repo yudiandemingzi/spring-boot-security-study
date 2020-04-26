@@ -1,4 +1,4 @@
-package jincou.imgcheck.entity;
+package com.jincou.imgcheck.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;

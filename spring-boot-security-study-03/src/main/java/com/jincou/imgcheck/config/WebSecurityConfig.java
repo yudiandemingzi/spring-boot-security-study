@@ -1,6 +1,7 @@
-package jincou.imgcheck.config;
+package com.jincou.imgcheck.config;
 
-import com.jincou.service.UserService;
+import com.jincou.imgcheck.service.UserService;
+import com.jincou.imgcheck.filter.ValidateCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
@@ -44,6 +46,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenctiationFailHandler authenctiationFailHandler;
 
+    /**
+     * 失败处理器
+     */
+    @Autowired
+    private ValidateCodeFilter validateCodeFilter;
+
     @Autowired
     private DataSource dataSource;
 
@@ -61,8 +69,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        //添加自定义过滤器 来验证图形验证码 这个过滤器肯定是在验证用户名账号 密码之前执行的
         //开启登陆配置
-        http.authorizeRequests()
+          http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class).authorizeRequests()
                 // 登录之后就能访问
                 .antMatchers("/no-authorize").authenticated()
                 // 表示访问/admin/** 需要校长角色权限
@@ -108,7 +117,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/no-login");
+        web.ignoring().antMatchers("/no-login","/code/image");
     }
 
     /**

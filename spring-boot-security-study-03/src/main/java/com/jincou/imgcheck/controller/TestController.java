@@ -1,6 +1,6 @@
-package jincou.imgcheck.controller;
+package com.jincou.imgcheck.controller;
 
-import jincou.imgcheck.util.ServiceResponse;
+import com.jincou.imgcheck.util.ServiceResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

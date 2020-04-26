@@ -1,4 +1,4 @@
-package jincou.imgcheck.entity;
+package com.jincou.imgcheck.entity;
 
 /**
  * roles_user

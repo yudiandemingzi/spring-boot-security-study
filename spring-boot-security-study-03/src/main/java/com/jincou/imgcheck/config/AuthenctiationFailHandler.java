@@ -1,4 +1,4 @@
-package jincou.imgcheck.config;
+package com.jincou.imgcheck.config;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class AuthenctiationFailHandler extends SimpleUrlAuthenticationFailureHan
         log.info("登陆失败 失败信息 = {}", JSONObject.toJSONString(exception));
         response.setContentType("application/json;charset=utf-8");
         PrintWriter out = response.getWriter();
-        out.write("{\"status\":\"error\",\"msg\":\"登录失败\"}");
+        out.write("{\"status\":\"error\",\"msg\":\"" + exception.getMessage()+"\"}\"");
         out.flush();
         out.close();
     }

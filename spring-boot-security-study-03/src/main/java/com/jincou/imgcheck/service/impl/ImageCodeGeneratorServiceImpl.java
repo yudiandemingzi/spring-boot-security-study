@@ -1,7 +1,8 @@
-package com.jincou.imgcheck.validate.code;
+package com.jincou.imgcheck.service.impl;
 
 import com.jincou.imgcheck.properties.ImageCode;
 import com.jincou.imgcheck.properties.ImageCodeProperties;
+import com.jincou.imgcheck.service.ValidateCodeGeneratorService;
 import lombok.Data;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -15,7 +16,7 @@ import java.util.Random;
  * @date 2018/4/7 上午11:09
  */
 @Data
-public class ImageCodeGenerator implements ValidateCodeGenerator {
+public class ImageCodeGeneratorServiceImpl implements ValidateCodeGeneratorService {
 
     private static final String IMAGE_WIDTH_NAME = "width";
     private static final String IMAGE_HEIGHT_NAME = "height";
@@ -30,7 +31,7 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
         int height = ServletRequestUtils.getIntParameter(request.getRequest(), IMAGE_HEIGHT_NAME, imageCodeProperties.getHeight());
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics g = image.getGraphics();
-
+        //验证码随机数
         Random random = new Random();
 
         // 生成画布
