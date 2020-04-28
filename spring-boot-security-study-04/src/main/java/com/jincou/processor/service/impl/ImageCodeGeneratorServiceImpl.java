@@ -5,6 +5,7 @@ import com.jincou.processor.dto.img.ImageCode;
 import com.jincou.processor.service.ValidateCodeGeneratorService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
@@ -19,6 +20,7 @@ import java.util.Random;
   * @date 2020/4/27 上午10:52
   */
 @Data
+@Component("imageCodeGeneratorService")
 public class ImageCodeGeneratorServiceImpl implements ValidateCodeGeneratorService {
 
     private static final String IMAGE_WIDTH_NAME = "width";

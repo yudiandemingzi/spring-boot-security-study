@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
  * @author xub
  * @date 2020/4/27 上午11:30
  */
-@Component("imageCodeProcessor")
+@Component("imageCodeProcessorService")
 public class ImageCodeProcessorServiceImpl extends AbstractValidateCodeProcessorService<ImageCode> {
 
     private static final String FORMAT_NAME = "JPEG";
@@ -23,7 +23,6 @@ public class ImageCodeProcessorServiceImpl extends AbstractValidateCodeProcessor
      *
      * @param request   ServletWebRequest实例对象
      * @param imageCode 验证码
-     * @throws Exception 异常
      */
     @Override
     protected void send(ServletWebRequest request, ImageCode imageCode) throws Exception {

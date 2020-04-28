@@ -13,9 +13,9 @@ import org.springframework.web.context.request.ServletWebRequest;
 public interface ValidateCodeGeneratorService {
 
     /**
-     * 这个常量有用
+     * 这个常量也是用来 type+CodeGeneratorService获取对于bean对象
      */
-    String CODE_GENERATOR = "CodeGenerator";
+    String CODE_GENERATOR = "CodeGeneratorService";
 
     /**
      * 生成验证码

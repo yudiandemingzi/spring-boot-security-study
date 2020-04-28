@@ -49,7 +49,6 @@ public abstract class AbstractValidateCodeProcessorService<C> implements Validat
      * 生成验证码
      *
      */
-    @SuppressWarnings("unchecked")
     private C generate(ServletWebRequest request) {
         String type = getProcessorType(request);
         //这里 image+CodeGenerator = imgCodeGenerator 对应的就是ImageCodeGeneratorServiceService

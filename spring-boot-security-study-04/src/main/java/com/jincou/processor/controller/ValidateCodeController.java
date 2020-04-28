@@ -33,8 +33,9 @@ public class ValidateCodeController {
 
     @RequestMapping("/code/{type}")
     public void createCode(HttpServletRequest request, HttpServletResponse response, @PathVariable String type) throws Exception {
-        if(StringUtils.equalsAny(type, "image", "sms")){
+        if(!StringUtils.equalsAny(type, "image", "sms")){
             log.info("type类型错误 type={}",type);
+            return;
         };
 
         //根据type获取具体的实现类
