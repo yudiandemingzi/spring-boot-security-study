@@ -1,10 +1,10 @@
-package com.jincou.imgcheck.filter;
+package com.jincou.processor.filter;
 
-import com.jincou.imgcheck.config.AuthenctiationFailHandler;
-import com.jincou.imgcheck.controller.ValidateCodeController;
-import com.jincou.imgcheck.exception.ValidateCodeException;
-import com.jincou.imgcheck.properties.ImageCodeProperties;
-import com.jincou.imgcheck.properties.ImageCode;
+
+import com.jincou.processor.config.AuthenctiationFailHandler;
+import com.jincou.processor.config.ValidateCodeProperties;
+import com.jincou.processor.dto.img.ImageCode;
+import com.jincou.processor.exception.ValidateCodeException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +28,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.jincou.processor.service.ValidateCodeProcessorService.SESSION_KEY_PREFIX;
+
 
 /**
   * @Description: 这个才是整个核心 这个过滤器肯定要在验证账号密码之前进行验证过滤
@@ -40,18 +42,22 @@ import java.util.Set;
 @Data
 @Slf4j
 @Component
-public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean {
+public class ImageCodeFilter extends OncePerRequestFilter implements InitializingBean {
+
+
+    private static final String IMAGE_SESSION_KEY = SESSION_KEY_PREFIX + "IMAGE";
 
     /**
      * 失败处理器
      */
     @Autowired
     private AuthenctiationFailHandler authenctiationFailHandler;
+
     /**
      * 验证码属性类
      */
     @Autowired
-    private ImageCodeProperties imageCodeProperties;
+    private ValidateCodeProperties validateCodeProperties;
 
     /**
      * 存放需要走验证码请求url
@@ -72,7 +78,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     @Override
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
-        String[] configUrls = StringUtils.split(imageCodeProperties.getUrl(), ",");
+        String[] configUrls = StringUtils.split(validateCodeProperties.getImage().getUrl(), ",");
         // 登录的链接是必须要进行验证码验证的
         urls.addAll(Arrays.asList(configUrls));
     }
@@ -110,7 +116,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
      */
     private void validate(ServletWebRequest request) throws ServletRequestBindingException {
         // 从session中获取图片验证码
-        ImageCode imageCodeInSession = (ImageCode) sessionStrategy.getAttribute(request, ValidateCodeController.SESSION_KEY);
+        ImageCode imageCodeInSession = (ImageCode) sessionStrategy.getAttribute(request, IMAGE_SESSION_KEY);
 
         // 从请求中获取用户填写的验证码
         String imageCodeInRequest = ServletRequestUtils.getStringParameter(request.getRequest(), "imageCode");
@@ -121,7 +127,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
             throw new ValidateCodeException("验证码不存在");
         }
         if (imageCodeInSession.isExpired()) {
-            sessionStrategy.removeAttribute(request, ValidateCodeController.SESSION_KEY);
+            sessionStrategy.removeAttribute(request, IMAGE_SESSION_KEY);
             throw new ValidateCodeException("验证码已过期");
         }
 
@@ -131,6 +137,6 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
             throw new ValidateCodeException("验证码不匹配");
         }
         // 验证成功，删除session中的验证码
-        sessionStrategy.removeAttribute(request, ValidateCodeController.SESSION_KEY);
+        sessionStrategy.removeAttribute(request, IMAGE_SESSION_KEY);
     }
 }

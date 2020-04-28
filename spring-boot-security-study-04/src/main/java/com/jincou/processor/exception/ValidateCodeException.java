@@ -1,4 +1,4 @@
-package com.jincou.imgcheck.exception;
+package com.jincou.processor.exception;
 
 import org.springframework.security.core.AuthenticationException;
 

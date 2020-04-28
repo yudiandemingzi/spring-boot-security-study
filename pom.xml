@@ -7,6 +7,7 @@
         <module>spring-boot-security-study-01</module>
         <module>spring-boot-security-study-02</module>
         <module>spring-boot-security-study-03</module>
+        <module>spring-boot-security-study-04</module>
     </modules>
     <parent>
     <groupId>org.springframework.boot</groupId>
